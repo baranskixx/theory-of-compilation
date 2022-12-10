@@ -28,46 +28,46 @@ def p_error(p):
 
 def p_start(p):
     """start :
-            | keywords"""
+            | instructions"""
 
 
-def p_keywords(p):
-    """ keywords : keyword
-                    | keywords keyword"""
+def p_instructions(p):
+    """ instructions : instr
+                    | instructions instr"""
 
 
-def p_keyword(p):
-    """ keyword : keyword_if
-                | keyword_for
-                | keyword_while
-                | keyword_return ';'
-                | keyword_assign ';'
-                | keyword_print ';'
+def p_instr(p):
+    """ instr : instr_if
+                | instr_for
+                | instr_while
+                | instr_return ';'
+                | instr_assign ';'
+                | instr_print ';'
                 | break ';'
                 | continue ';' """
 
 
 def p_scope(p):
-    """ keyword : '{' keywords '}' """
+    """ instr : '{' instructions '}' """
 
 
-def p_keyword_if(p):
-    """ keyword_if : IF '(' expr ')' keyword %prec IFX
-                    | IF '(' expr ')' keyword ELSE keyword"""
+def p_instr_if(p):
+    """ instr_if : IF '(' expr ')' instr %prec IFX
+                    | IF '(' expr ')' instr ELSE instr"""
 
 
-def p_keyword_return(p):
-    """ keyword_return : RETURN
+def p_instr_return(p):
+    """ instr_return : RETURN
                         | RETURN expr"""
 
 ###### LOOPS ######
 
-def p_keyword_for(p):
-    """ keyword_for : FOR id '=' expr ':' expr keyword"""
+def p_instr_for(p):
+    """ instr_for : FOR id '=' expr ':' expr instr"""
 
 
-def p_keyword_while(p):
-    """ keyword_while : WHILE '(' expr ')' keyword"""
+def p_instr_while(p):
+    """ instr_while : WHILE '(' expr ')' instr"""
 
 
 def p_break(p):
@@ -83,8 +83,8 @@ def p_str(p):
     """str : STRING"""
 
 
-def p_keyword_print(p):
-    """ keyword_print : PRINT printables"""
+def p_instr_print(p):
+    """ instr_print : PRINT printables"""
 
 
 def p_printables(p):
@@ -98,8 +98,8 @@ def p_printable(p):
 
 ###### ASSIGNING ######
 
-def p_keyword_assign(p):
-    """ keyword_assign : assignable '=' expr
+def p_instr_assign(p):
+    """ instr_assign : assignable '=' expr
                     | assignable ADDASSIGN expr
                     | assignable SUBASSIGN expr
                     | assignable MULASSIGN expr

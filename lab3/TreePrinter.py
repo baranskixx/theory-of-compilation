@@ -14,10 +14,10 @@ class TreePrinter:
     # def printTree(self, indent):
     #     raise Exception("printTree not defined in class " + self.__class__.__name__)
 
-    @addToClass(AST.Keyword)
+    @addToClass(AST.Instruction)
     def printTree(self, indent):
-        for keyword in self.keywords:
-            keyword.printTree(indent)
+        for instr in self.instructions:
+            instr.printTree(indent)
 
     @addToClass(AST.BinExpression)
     def printTree(self, indent):

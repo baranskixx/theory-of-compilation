@@ -4,7 +4,7 @@ import AST
 
 tokens = scanner.tokens
 precedence = (
-    ('nonassoc', 'IFX'),
+    ('nonassoc', 'IF'),
     ('nonassoc', 'ELSE'),
     ('right', 'MULASSIGN', 'DIVASSIGN', 'SUBASSIGN', 'ADDASSIGN'),
     ('nonassoc', '<', '>', 'GEQ', 'LEQ', 'EQ', 'NEQ'),
@@ -30,51 +30,51 @@ def p_error(p):
 
 def p_start(p):
     """start :
-            | keywords"""
-    p[0] = AST.Keyword(p[1])
+            | instructions"""
+    p[0] = AST.Instruction(p[1])
 
-def p_keywords(p):
-    """ keywords : keyword
-                    | keywords keyword"""
+def p_instructions(p):
+    """ instructions : instr
+                    | instructions instr"""
     p[0] = p[1] + [p[2]] if len(p) == 3 else [p[1]]
 
-def p_keyword(p):
-    """ keyword : keyword_if
-                | keyword_for
-                | keyword_while
-                | keyword_return ';'
-                | keyword_assign ';'
-                | keyword_print ';'
+def p_instr(p):
+    """ instr : instr_if
+                | instr_for
+                | instr_while
+                | instr_return ';'
+                | instr_assign ';'
+                | instr_print ';'
                 | break ';'
                 | continue ';' """
     p[0] = p[1]
 
 
 def p_scope(p):
-    """ keyword : '{' keywords '}' """
+    """ instr : '{' instructions '}' """
     p[0] = AST.Keyword(p[2])
 
 
-def p_keyword_if(p):
-    """ keyword_if : IF '(' expr ')' keyword %prec IFX
-                    | IF '(' expr ')' keyword ELSE keyword"""
+def p_instr_if(p):
+    """ instr_if : IF '(' expr ')' instr %prec IF
+                    | IF '(' expr ')' instr ELSE instr"""
     p[0] = AST.IfCondition(p[3], p[5], p[7] if len(p) > 7 else None)
 
 
-def p_keyword_return(p):
-    """ keyword_return : RETURN
+def p_instr_return(p):
+    """ instr_return : RETURN
                         | RETURN expr"""
     p[0] = AST.Return() if len(p) == 1 else AST.Return(p[2])
 
 ###### LOOPS ######
 
-def p_keyword_for(p):
-    """ keyword_for : FOR id '=' expr ':' expr keyword"""
+def p_instr_for(p):
+    """ instr_for : FOR id '=' expr ':' expr instr"""
     p[0] = AST.ForLoop(p[2], p[4], p[6], p[7])
 
 
-def p_keyword_while(p):
-    """ keyword_while : WHILE '(' expr ')' keyword"""
+def p_instr_while(p):
+    """ instr_while : WHILE '(' expr ')' instr"""
     p[0] = AST.WhileLoop(p[3], p[5])
 
 
@@ -94,9 +94,10 @@ def p_str(p):
     p[0] = AST.String(p[1])
 
 
-def p_keyword_print(p):
-    """ keyword_print : PRINT printables"""
+def p_instr_print(p):
+    """ instr_print : PRINT printables"""
     p[0] = AST.Print(p[2])
+
 
 def p_printables(p):
     """ printables : printable
@@ -111,8 +112,8 @@ def p_printable(p):
 
 ###### ASSIGNING ######
 
-def p_keyword_assign(p):
-    """ keyword_assign : assignable '=' expr
+def p_instr_assign(p):
+    """ instr_assign : assignable '=' expr
                     | assignable ADDASSIGN expr
                     | assignable SUBASSIGN expr
                     | assignable MULASSIGN expr
@@ -208,7 +209,7 @@ def p_vector(p):
 
 def p_vector_element(p):
     """ vector_element : id "[" INTNUM "]" """
-    p[0] = AST.Assignable(p[1], p[3])
+    p[0] = AST.Assignable(p[1], [p[3]])
 
 ###### VARIABLES ######
 

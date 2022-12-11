@@ -1,6 +1,5 @@
 class Node(object):
     def print_indent(self, depth):
-        # print(self.__class__.__name__)
         print("|    " * depth, end='')
         
 
@@ -9,9 +8,9 @@ class Error(Node):
         pass
 
 # USED FOR p_start and p_keyword
-class Keyword(Node):
-    def __init__(self, keywords):
-        self.keywords = keywords
+class Instruction(Node):
+    def __init__(self, instructions):
+        self.instructions = instructions
 
 class BinExpression(Node):
     def __init__(self, left_side, op, right_side):

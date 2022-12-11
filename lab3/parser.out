@@ -4,37 +4,37 @@ Grammar
 
 Rule 0     S' -> start
 Rule 1     start -> <empty>
-Rule 2     start -> keywords
-Rule 3     keywords -> keyword
-Rule 4     keywords -> keywords keyword
-Rule 5     keyword -> keyword_if
-Rule 6     keyword -> keyword_for
-Rule 7     keyword -> keyword_while
-Rule 8     keyword -> keyword_return ;
-Rule 9     keyword -> keyword_assign ;
-Rule 10    keyword -> keyword_print ;
-Rule 11    keyword -> break ;
-Rule 12    keyword -> continue ;
-Rule 13    keyword -> { keywords }
-Rule 14    keyword_if -> IF ( expr ) keyword
-Rule 15    keyword_if -> IF ( expr ) keyword ELSE keyword
-Rule 16    keyword_return -> RETURN
-Rule 17    keyword_return -> RETURN expr
-Rule 18    keyword_for -> FOR id = expr : expr keyword
-Rule 19    keyword_while -> WHILE ( expr ) keyword
+Rule 2     start -> instructions
+Rule 3     instructions -> instr
+Rule 4     instructions -> instructions instr
+Rule 5     instr -> instr_if
+Rule 6     instr -> instr_for
+Rule 7     instr -> instr_while
+Rule 8     instr -> instr_return ;
+Rule 9     instr -> instr_assign ;
+Rule 10    instr -> instr_print ;
+Rule 11    instr -> break ;
+Rule 12    instr -> continue ;
+Rule 13    instr -> { instructions }
+Rule 14    instr_if -> IF ( expr ) instr
+Rule 15    instr_if -> IF ( expr ) instr ELSE instr
+Rule 16    instr_return -> RETURN
+Rule 17    instr_return -> RETURN expr
+Rule 18    instr_for -> FOR id = expr : expr instr
+Rule 19    instr_while -> WHILE ( expr ) instr
 Rule 20    break -> BREAK
 Rule 21    continue -> CONTINUE
 Rule 22    str -> STRING
-Rule 23    keyword_print -> PRINT printables
+Rule 23    instr_print -> PRINT printables
 Rule 24    printables -> printable
 Rule 25    printables -> printables , printable
 Rule 26    printable -> expr
 Rule 27    printable -> str
-Rule 28    keyword_assign -> assignable = expr
-Rule 29    keyword_assign -> assignable ADDASSIGN expr
-Rule 30    keyword_assign -> assignable SUBASSIGN expr
-Rule 31    keyword_assign -> assignable MULASSIGN expr
-Rule 32    keyword_assign -> assignable DIVASSIGN expr
+Rule 28    instr_assign -> assignable = expr
+Rule 29    instr_assign -> assignable ADDASSIGN expr
+Rule 30    instr_assign -> assignable SUBASSIGN expr
+Rule 31    instr_assign -> assignable MULASSIGN expr
+Rule 32    instr_assign -> assignable DIVASSIGN expr
 Rule 33    id -> ID
 Rule 34    assignable -> id
 Rule 35    assignable -> matrix_element
@@ -131,14 +131,14 @@ break                : 11
 continue             : 12
 expr                 : 14 15 17 18 18 19 26 28 29 30 31 32 37 38 39 40 45 45 46 46 47 47 48 48 49 49 50 50 51 51 52 52 53 53 54 54 55 55 56 56 57 57 58 58
 id                   : 18 34 63 67
-keyword              : 3 4 14 15 15 18 19
-keyword_assign       : 9
-keyword_for          : 6
-keyword_if           : 5
-keyword_print        : 10
-keyword_return       : 8
-keyword_while        : 7
-keywords             : 2 4 13
+instr                : 3 4 14 15 15 18 19
+instr_assign         : 9
+instr_for            : 6
+instr_if             : 5
+instr_print          : 10
+instr_return         : 8
+instr_while          : 7
+instructions         : 2 4 13
 matrix               : 42
 matrix_create        : 39
 matrix_element       : 35
@@ -158,30 +158,30 @@ state 0
 
     (0) S' -> . start
     (1) start -> .
-    (2) start -> . keywords
-    (3) keywords -> . keyword
-    (4) keywords -> . keywords keyword
-    (5) keyword -> . keyword_if
-    (6) keyword -> . keyword_for
-    (7) keyword -> . keyword_while
-    (8) keyword -> . keyword_return ;
-    (9) keyword -> . keyword_assign ;
-    (10) keyword -> . keyword_print ;
-    (11) keyword -> . break ;
-    (12) keyword -> . continue ;
-    (13) keyword -> . { keywords }
-    (14) keyword_if -> . IF ( expr ) keyword
-    (15) keyword_if -> . IF ( expr ) keyword ELSE keyword
-    (18) keyword_for -> . FOR id = expr : expr keyword
-    (19) keyword_while -> . WHILE ( expr ) keyword
-    (16) keyword_return -> . RETURN
-    (17) keyword_return -> . RETURN expr
-    (28) keyword_assign -> . assignable = expr
-    (29) keyword_assign -> . assignable ADDASSIGN expr
-    (30) keyword_assign -> . assignable SUBASSIGN expr
-    (31) keyword_assign -> . assignable MULASSIGN expr
-    (32) keyword_assign -> . assignable DIVASSIGN expr
-    (23) keyword_print -> . PRINT printables
+    (2) start -> . instructions
+    (3) instructions -> . instr
+    (4) instructions -> . instructions instr
+    (5) instr -> . instr_if
+    (6) instr -> . instr_for
+    (7) instr -> . instr_while
+    (8) instr -> . instr_return ;
+    (9) instr -> . instr_assign ;
+    (10) instr -> . instr_print ;
+    (11) instr -> . break ;
+    (12) instr -> . continue ;
+    (13) instr -> . { instructions }
+    (14) instr_if -> . IF ( expr ) instr
+    (15) instr_if -> . IF ( expr ) instr ELSE instr
+    (18) instr_for -> . FOR id = expr : expr instr
+    (19) instr_while -> . WHILE ( expr ) instr
+    (16) instr_return -> . RETURN
+    (17) instr_return -> . RETURN expr
+    (28) instr_assign -> . assignable = expr
+    (29) instr_assign -> . assignable ADDASSIGN expr
+    (30) instr_assign -> . assignable SUBASSIGN expr
+    (31) instr_assign -> . assignable MULASSIGN expr
+    (32) instr_assign -> . assignable DIVASSIGN expr
+    (23) instr_print -> . PRINT printables
     (20) break -> . BREAK
     (21) continue -> . CONTINUE
     (34) assignable -> . id
@@ -203,14 +203,14 @@ state 0
     ID              shift and go to state 24
 
     start                          shift and go to state 1
-    keywords                       shift and go to state 2
-    keyword                        shift and go to state 3
-    keyword_if                     shift and go to state 4
-    keyword_for                    shift and go to state 5
-    keyword_while                  shift and go to state 6
-    keyword_return                 shift and go to state 7
-    keyword_assign                 shift and go to state 8
-    keyword_print                  shift and go to state 9
+    instructions                   shift and go to state 2
+    instr                          shift and go to state 3
+    instr_if                       shift and go to state 4
+    instr_for                      shift and go to state 5
+    instr_while                    shift and go to state 6
+    instr_return                   shift and go to state 7
+    instr_assign                   shift and go to state 8
+    instr_print                    shift and go to state 9
     break                          shift and go to state 10
     continue                       shift and go to state 11
     id                             shift and go to state 15
@@ -226,29 +226,29 @@ state 1
 
 state 2
 
-    (2) start -> keywords .
-    (4) keywords -> keywords . keyword
-    (5) keyword -> . keyword_if
-    (6) keyword -> . keyword_for
-    (7) keyword -> . keyword_while
-    (8) keyword -> . keyword_return ;
-    (9) keyword -> . keyword_assign ;
-    (10) keyword -> . keyword_print ;
-    (11) keyword -> . break ;
-    (12) keyword -> . continue ;
-    (13) keyword -> . { keywords }
-    (14) keyword_if -> . IF ( expr ) keyword
-    (15) keyword_if -> . IF ( expr ) keyword ELSE keyword
-    (18) keyword_for -> . FOR id = expr : expr keyword
-    (19) keyword_while -> . WHILE ( expr ) keyword
-    (16) keyword_return -> . RETURN
-    (17) keyword_return -> . RETURN expr
-    (28) keyword_assign -> . assignable = expr
-    (29) keyword_assign -> . assignable ADDASSIGN expr
-    (30) keyword_assign -> . assignable SUBASSIGN expr
-    (31) keyword_assign -> . assignable MULASSIGN expr
-    (32) keyword_assign -> . assignable DIVASSIGN expr
-    (23) keyword_print -> . PRINT printables
+    (2) start -> instructions .
+    (4) instructions -> instructions . instr
+    (5) instr -> . instr_if
+    (6) instr -> . instr_for
+    (7) instr -> . instr_while
+    (8) instr -> . instr_return ;
+    (9) instr -> . instr_assign ;
+    (10) instr -> . instr_print ;
+    (11) instr -> . break ;
+    (12) instr -> . continue ;
+    (13) instr -> . { instructions }
+    (14) instr_if -> . IF ( expr ) instr
+    (15) instr_if -> . IF ( expr ) instr ELSE instr
+    (18) instr_for -> . FOR id = expr : expr instr
+    (19) instr_while -> . WHILE ( expr ) instr
+    (16) instr_return -> . RETURN
+    (17) instr_return -> . RETURN expr
+    (28) instr_assign -> . assignable = expr
+    (29) instr_assign -> . assignable ADDASSIGN expr
+    (30) instr_assign -> . assignable SUBASSIGN expr
+    (31) instr_assign -> . assignable MULASSIGN expr
+    (32) instr_assign -> . assignable DIVASSIGN expr
+    (23) instr_print -> . PRINT printables
     (20) break -> . BREAK
     (21) continue -> . CONTINUE
     (34) assignable -> . id
@@ -258,7 +258,7 @@ state 2
     (63) matrix_element -> . id [ INTNUM , INTNUM ]
     (67) vector_element -> . id [ INTNUM ]
 
-    $end            reduce using rule 2 (start -> keywords .)
+    $end            reduce using rule 2 (start -> instructions .)
     {               shift and go to state 12
     IF              shift and go to state 13
     FOR             shift and go to state 14
@@ -269,13 +269,13 @@ state 2
     CONTINUE        shift and go to state 21
     ID              shift and go to state 24
 
-    keyword                        shift and go to state 25
-    keyword_if                     shift and go to state 4
-    keyword_for                    shift and go to state 5
-    keyword_while                  shift and go to state 6
-    keyword_return                 shift and go to state 7
-    keyword_assign                 shift and go to state 8
-    keyword_print                  shift and go to state 9
+    instr                          shift and go to state 25
+    instr_if                       shift and go to state 4
+    instr_for                      shift and go to state 5
+    instr_while                    shift and go to state 6
+    instr_return                   shift and go to state 7
+    instr_assign                   shift and go to state 8
+    instr_print                    shift and go to state 9
     break                          shift and go to state 10
     continue                       shift and go to state 11
     id                             shift and go to state 15
@@ -285,136 +285,136 @@ state 2
 
 state 3
 
-    (3) keywords -> keyword .
+    (3) instructions -> instr .
 
-    {               reduce using rule 3 (keywords -> keyword .)
-    IF              reduce using rule 3 (keywords -> keyword .)
-    FOR             reduce using rule 3 (keywords -> keyword .)
-    WHILE           reduce using rule 3 (keywords -> keyword .)
-    RETURN          reduce using rule 3 (keywords -> keyword .)
-    PRINT           reduce using rule 3 (keywords -> keyword .)
-    BREAK           reduce using rule 3 (keywords -> keyword .)
-    CONTINUE        reduce using rule 3 (keywords -> keyword .)
-    ID              reduce using rule 3 (keywords -> keyword .)
-    $end            reduce using rule 3 (keywords -> keyword .)
-    }               reduce using rule 3 (keywords -> keyword .)
+    {               reduce using rule 3 (instructions -> instr .)
+    IF              reduce using rule 3 (instructions -> instr .)
+    FOR             reduce using rule 3 (instructions -> instr .)
+    WHILE           reduce using rule 3 (instructions -> instr .)
+    RETURN          reduce using rule 3 (instructions -> instr .)
+    PRINT           reduce using rule 3 (instructions -> instr .)
+    BREAK           reduce using rule 3 (instructions -> instr .)
+    CONTINUE        reduce using rule 3 (instructions -> instr .)
+    ID              reduce using rule 3 (instructions -> instr .)
+    $end            reduce using rule 3 (instructions -> instr .)
+    }               reduce using rule 3 (instructions -> instr .)
 
 
 state 4
 
-    (5) keyword -> keyword_if .
+    (5) instr -> instr_if .
 
-    {               reduce using rule 5 (keyword -> keyword_if .)
-    IF              reduce using rule 5 (keyword -> keyword_if .)
-    FOR             reduce using rule 5 (keyword -> keyword_if .)
-    WHILE           reduce using rule 5 (keyword -> keyword_if .)
-    RETURN          reduce using rule 5 (keyword -> keyword_if .)
-    PRINT           reduce using rule 5 (keyword -> keyword_if .)
-    BREAK           reduce using rule 5 (keyword -> keyword_if .)
-    CONTINUE        reduce using rule 5 (keyword -> keyword_if .)
-    ID              reduce using rule 5 (keyword -> keyword_if .)
-    $end            reduce using rule 5 (keyword -> keyword_if .)
-    }               reduce using rule 5 (keyword -> keyword_if .)
-    ELSE            reduce using rule 5 (keyword -> keyword_if .)
+    {               reduce using rule 5 (instr -> instr_if .)
+    IF              reduce using rule 5 (instr -> instr_if .)
+    FOR             reduce using rule 5 (instr -> instr_if .)
+    WHILE           reduce using rule 5 (instr -> instr_if .)
+    RETURN          reduce using rule 5 (instr -> instr_if .)
+    PRINT           reduce using rule 5 (instr -> instr_if .)
+    BREAK           reduce using rule 5 (instr -> instr_if .)
+    CONTINUE        reduce using rule 5 (instr -> instr_if .)
+    ID              reduce using rule 5 (instr -> instr_if .)
+    $end            reduce using rule 5 (instr -> instr_if .)
+    }               reduce using rule 5 (instr -> instr_if .)
+    ELSE            reduce using rule 5 (instr -> instr_if .)
 
 
 state 5
 
-    (6) keyword -> keyword_for .
+    (6) instr -> instr_for .
 
-    {               reduce using rule 6 (keyword -> keyword_for .)
-    IF              reduce using rule 6 (keyword -> keyword_for .)
-    FOR             reduce using rule 6 (keyword -> keyword_for .)
-    WHILE           reduce using rule 6 (keyword -> keyword_for .)
-    RETURN          reduce using rule 6 (keyword -> keyword_for .)
-    PRINT           reduce using rule 6 (keyword -> keyword_for .)
-    BREAK           reduce using rule 6 (keyword -> keyword_for .)
-    CONTINUE        reduce using rule 6 (keyword -> keyword_for .)
-    ID              reduce using rule 6 (keyword -> keyword_for .)
-    $end            reduce using rule 6 (keyword -> keyword_for .)
-    }               reduce using rule 6 (keyword -> keyword_for .)
-    ELSE            reduce using rule 6 (keyword -> keyword_for .)
+    {               reduce using rule 6 (instr -> instr_for .)
+    IF              reduce using rule 6 (instr -> instr_for .)
+    FOR             reduce using rule 6 (instr -> instr_for .)
+    WHILE           reduce using rule 6 (instr -> instr_for .)
+    RETURN          reduce using rule 6 (instr -> instr_for .)
+    PRINT           reduce using rule 6 (instr -> instr_for .)
+    BREAK           reduce using rule 6 (instr -> instr_for .)
+    CONTINUE        reduce using rule 6 (instr -> instr_for .)
+    ID              reduce using rule 6 (instr -> instr_for .)
+    $end            reduce using rule 6 (instr -> instr_for .)
+    }               reduce using rule 6 (instr -> instr_for .)
+    ELSE            reduce using rule 6 (instr -> instr_for .)
 
 
 state 6
 
-    (7) keyword -> keyword_while .
+    (7) instr -> instr_while .
 
-    {               reduce using rule 7 (keyword -> keyword_while .)
-    IF              reduce using rule 7 (keyword -> keyword_while .)
-    FOR             reduce using rule 7 (keyword -> keyword_while .)
-    WHILE           reduce using rule 7 (keyword -> keyword_while .)
-    RETURN          reduce using rule 7 (keyword -> keyword_while .)
-    PRINT           reduce using rule 7 (keyword -> keyword_while .)
-    BREAK           reduce using rule 7 (keyword -> keyword_while .)
-    CONTINUE        reduce using rule 7 (keyword -> keyword_while .)
-    ID              reduce using rule 7 (keyword -> keyword_while .)
-    $end            reduce using rule 7 (keyword -> keyword_while .)
-    }               reduce using rule 7 (keyword -> keyword_while .)
-    ELSE            reduce using rule 7 (keyword -> keyword_while .)
+    {               reduce using rule 7 (instr -> instr_while .)
+    IF              reduce using rule 7 (instr -> instr_while .)
+    FOR             reduce using rule 7 (instr -> instr_while .)
+    WHILE           reduce using rule 7 (instr -> instr_while .)
+    RETURN          reduce using rule 7 (instr -> instr_while .)
+    PRINT           reduce using rule 7 (instr -> instr_while .)
+    BREAK           reduce using rule 7 (instr -> instr_while .)
+    CONTINUE        reduce using rule 7 (instr -> instr_while .)
+    ID              reduce using rule 7 (instr -> instr_while .)
+    $end            reduce using rule 7 (instr -> instr_while .)
+    }               reduce using rule 7 (instr -> instr_while .)
+    ELSE            reduce using rule 7 (instr -> instr_while .)
 
 
 state 7
 
-    (8) keyword -> keyword_return . ;
+    (8) instr -> instr_return . ;
 
     ;               shift and go to state 26
 
 
 state 8
 
-    (9) keyword -> keyword_assign . ;
+    (9) instr -> instr_assign . ;
 
     ;               shift and go to state 27
 
 
 state 9
 
-    (10) keyword -> keyword_print . ;
+    (10) instr -> instr_print . ;
 
     ;               shift and go to state 28
 
 
 state 10
 
-    (11) keyword -> break . ;
+    (11) instr -> break . ;
 
     ;               shift and go to state 29
 
 
 state 11
 
-    (12) keyword -> continue . ;
+    (12) instr -> continue . ;
 
     ;               shift and go to state 30
 
 
 state 12
 
-    (13) keyword -> { . keywords }
-    (3) keywords -> . keyword
-    (4) keywords -> . keywords keyword
-    (5) keyword -> . keyword_if
-    (6) keyword -> . keyword_for
-    (7) keyword -> . keyword_while
-    (8) keyword -> . keyword_return ;
-    (9) keyword -> . keyword_assign ;
-    (10) keyword -> . keyword_print ;
-    (11) keyword -> . break ;
-    (12) keyword -> . continue ;
-    (13) keyword -> . { keywords }
-    (14) keyword_if -> . IF ( expr ) keyword
-    (15) keyword_if -> . IF ( expr ) keyword ELSE keyword
-    (18) keyword_for -> . FOR id = expr : expr keyword
-    (19) keyword_while -> . WHILE ( expr ) keyword
-    (16) keyword_return -> . RETURN
-    (17) keyword_return -> . RETURN expr
-    (28) keyword_assign -> . assignable = expr
-    (29) keyword_assign -> . assignable ADDASSIGN expr
-    (30) keyword_assign -> . assignable SUBASSIGN expr
-    (31) keyword_assign -> . assignable MULASSIGN expr
-    (32) keyword_assign -> . assignable DIVASSIGN expr
-    (23) keyword_print -> . PRINT printables
+    (13) instr -> { . instructions }
+    (3) instructions -> . instr
+    (4) instructions -> . instructions instr
+    (5) instr -> . instr_if
+    (6) instr -> . instr_for
+    (7) instr -> . instr_while
+    (8) instr -> . instr_return ;
+    (9) instr -> . instr_assign ;
+    (10) instr -> . instr_print ;
+    (11) instr -> . break ;
+    (12) instr -> . continue ;
+    (13) instr -> . { instructions }
+    (14) instr_if -> . IF ( expr ) instr
+    (15) instr_if -> . IF ( expr ) instr ELSE instr
+    (18) instr_for -> . FOR id = expr : expr instr
+    (19) instr_while -> . WHILE ( expr ) instr
+    (16) instr_return -> . RETURN
+    (17) instr_return -> . RETURN expr
+    (28) instr_assign -> . assignable = expr
+    (29) instr_assign -> . assignable ADDASSIGN expr
+    (30) instr_assign -> . assignable SUBASSIGN expr
+    (31) instr_assign -> . assignable MULASSIGN expr
+    (32) instr_assign -> . assignable DIVASSIGN expr
+    (23) instr_print -> . PRINT printables
     (20) break -> . BREAK
     (21) continue -> . CONTINUE
     (34) assignable -> . id
@@ -434,14 +434,14 @@ state 12
     CONTINUE        shift and go to state 21
     ID              shift and go to state 24
 
-    keywords                       shift and go to state 31
-    keyword                        shift and go to state 3
-    keyword_if                     shift and go to state 4
-    keyword_for                    shift and go to state 5
-    keyword_while                  shift and go to state 6
-    keyword_return                 shift and go to state 7
-    keyword_assign                 shift and go to state 8
-    keyword_print                  shift and go to state 9
+    instructions                   shift and go to state 31
+    instr                          shift and go to state 3
+    instr_if                       shift and go to state 4
+    instr_for                      shift and go to state 5
+    instr_while                    shift and go to state 6
+    instr_return                   shift and go to state 7
+    instr_assign                   shift and go to state 8
+    instr_print                    shift and go to state 9
     break                          shift and go to state 10
     continue                       shift and go to state 11
     id                             shift and go to state 15
@@ -451,15 +451,15 @@ state 12
 
 state 13
 
-    (14) keyword_if -> IF . ( expr ) keyword
-    (15) keyword_if -> IF . ( expr ) keyword ELSE keyword
+    (14) instr_if -> IF . ( expr ) instr
+    (15) instr_if -> IF . ( expr ) instr ELSE instr
 
     (               shift and go to state 32
 
 
 state 14
 
-    (18) keyword_for -> FOR . id = expr : expr keyword
+    (18) instr_for -> FOR . id = expr : expr instr
     (33) id -> . ID
 
     ID              shift and go to state 24
@@ -511,15 +511,15 @@ state 15
 
 state 16
 
-    (19) keyword_while -> WHILE . ( expr ) keyword
+    (19) instr_while -> WHILE . ( expr ) instr
 
     (               shift and go to state 35
 
 
 state 17
 
-    (16) keyword_return -> RETURN .
-    (17) keyword_return -> RETURN . expr
+    (16) instr_return -> RETURN .
+    (17) instr_return -> RETURN . expr
     (37) expr -> . expr '
     (38) expr -> . ( expr )
     (39) expr -> . matrix_create ( expr )
@@ -553,7 +553,7 @@ state 17
     (63) matrix_element -> . id [ INTNUM , INTNUM ]
     (67) vector_element -> . id [ INTNUM ]
 
-    ;               reduce using rule 16 (keyword_return -> RETURN .)
+    ;               reduce using rule 16 (instr_return -> RETURN .)
     (               shift and go to state 37
     -               shift and go to state 39
     INTNUM          shift and go to state 42
@@ -574,11 +574,11 @@ state 17
 
 state 18
 
-    (28) keyword_assign -> assignable . = expr
-    (29) keyword_assign -> assignable . ADDASSIGN expr
-    (30) keyword_assign -> assignable . SUBASSIGN expr
-    (31) keyword_assign -> assignable . MULASSIGN expr
-    (32) keyword_assign -> assignable . DIVASSIGN expr
+    (28) instr_assign -> assignable . = expr
+    (29) instr_assign -> assignable . ADDASSIGN expr
+    (30) instr_assign -> assignable . SUBASSIGN expr
+    (31) instr_assign -> assignable . MULASSIGN expr
+    (32) instr_assign -> assignable . DIVASSIGN expr
 
     =               shift and go to state 48
     ADDASSIGN       shift and go to state 49
@@ -589,7 +589,7 @@ state 18
 
 state 19
 
-    (23) keyword_print -> PRINT . printables
+    (23) instr_print -> PRINT . printables
     (24) printables -> . printable
     (25) printables -> . printables , printable
     (26) printable -> . expr
@@ -787,136 +787,136 @@ state 24
 
 state 25
 
-    (4) keywords -> keywords keyword .
+    (4) instructions -> instructions instr .
 
-    {               reduce using rule 4 (keywords -> keywords keyword .)
-    IF              reduce using rule 4 (keywords -> keywords keyword .)
-    FOR             reduce using rule 4 (keywords -> keywords keyword .)
-    WHILE           reduce using rule 4 (keywords -> keywords keyword .)
-    RETURN          reduce using rule 4 (keywords -> keywords keyword .)
-    PRINT           reduce using rule 4 (keywords -> keywords keyword .)
-    BREAK           reduce using rule 4 (keywords -> keywords keyword .)
-    CONTINUE        reduce using rule 4 (keywords -> keywords keyword .)
-    ID              reduce using rule 4 (keywords -> keywords keyword .)
-    $end            reduce using rule 4 (keywords -> keywords keyword .)
-    }               reduce using rule 4 (keywords -> keywords keyword .)
+    {               reduce using rule 4 (instructions -> instructions instr .)
+    IF              reduce using rule 4 (instructions -> instructions instr .)
+    FOR             reduce using rule 4 (instructions -> instructions instr .)
+    WHILE           reduce using rule 4 (instructions -> instructions instr .)
+    RETURN          reduce using rule 4 (instructions -> instructions instr .)
+    PRINT           reduce using rule 4 (instructions -> instructions instr .)
+    BREAK           reduce using rule 4 (instructions -> instructions instr .)
+    CONTINUE        reduce using rule 4 (instructions -> instructions instr .)
+    ID              reduce using rule 4 (instructions -> instructions instr .)
+    $end            reduce using rule 4 (instructions -> instructions instr .)
+    }               reduce using rule 4 (instructions -> instructions instr .)
 
 
 state 26
 
-    (8) keyword -> keyword_return ; .
+    (8) instr -> instr_return ; .
 
-    {               reduce using rule 8 (keyword -> keyword_return ; .)
-    IF              reduce using rule 8 (keyword -> keyword_return ; .)
-    FOR             reduce using rule 8 (keyword -> keyword_return ; .)
-    WHILE           reduce using rule 8 (keyword -> keyword_return ; .)
-    RETURN          reduce using rule 8 (keyword -> keyword_return ; .)
-    PRINT           reduce using rule 8 (keyword -> keyword_return ; .)
-    BREAK           reduce using rule 8 (keyword -> keyword_return ; .)
-    CONTINUE        reduce using rule 8 (keyword -> keyword_return ; .)
-    ID              reduce using rule 8 (keyword -> keyword_return ; .)
-    $end            reduce using rule 8 (keyword -> keyword_return ; .)
-    }               reduce using rule 8 (keyword -> keyword_return ; .)
-    ELSE            reduce using rule 8 (keyword -> keyword_return ; .)
+    {               reduce using rule 8 (instr -> instr_return ; .)
+    IF              reduce using rule 8 (instr -> instr_return ; .)
+    FOR             reduce using rule 8 (instr -> instr_return ; .)
+    WHILE           reduce using rule 8 (instr -> instr_return ; .)
+    RETURN          reduce using rule 8 (instr -> instr_return ; .)
+    PRINT           reduce using rule 8 (instr -> instr_return ; .)
+    BREAK           reduce using rule 8 (instr -> instr_return ; .)
+    CONTINUE        reduce using rule 8 (instr -> instr_return ; .)
+    ID              reduce using rule 8 (instr -> instr_return ; .)
+    $end            reduce using rule 8 (instr -> instr_return ; .)
+    }               reduce using rule 8 (instr -> instr_return ; .)
+    ELSE            reduce using rule 8 (instr -> instr_return ; .)
 
 
 state 27
 
-    (9) keyword -> keyword_assign ; .
+    (9) instr -> instr_assign ; .
 
-    {               reduce using rule 9 (keyword -> keyword_assign ; .)
-    IF              reduce using rule 9 (keyword -> keyword_assign ; .)
-    FOR             reduce using rule 9 (keyword -> keyword_assign ; .)
-    WHILE           reduce using rule 9 (keyword -> keyword_assign ; .)
-    RETURN          reduce using rule 9 (keyword -> keyword_assign ; .)
-    PRINT           reduce using rule 9 (keyword -> keyword_assign ; .)
-    BREAK           reduce using rule 9 (keyword -> keyword_assign ; .)
-    CONTINUE        reduce using rule 9 (keyword -> keyword_assign ; .)
-    ID              reduce using rule 9 (keyword -> keyword_assign ; .)
-    $end            reduce using rule 9 (keyword -> keyword_assign ; .)
-    }               reduce using rule 9 (keyword -> keyword_assign ; .)
-    ELSE            reduce using rule 9 (keyword -> keyword_assign ; .)
+    {               reduce using rule 9 (instr -> instr_assign ; .)
+    IF              reduce using rule 9 (instr -> instr_assign ; .)
+    FOR             reduce using rule 9 (instr -> instr_assign ; .)
+    WHILE           reduce using rule 9 (instr -> instr_assign ; .)
+    RETURN          reduce using rule 9 (instr -> instr_assign ; .)
+    PRINT           reduce using rule 9 (instr -> instr_assign ; .)
+    BREAK           reduce using rule 9 (instr -> instr_assign ; .)
+    CONTINUE        reduce using rule 9 (instr -> instr_assign ; .)
+    ID              reduce using rule 9 (instr -> instr_assign ; .)
+    $end            reduce using rule 9 (instr -> instr_assign ; .)
+    }               reduce using rule 9 (instr -> instr_assign ; .)
+    ELSE            reduce using rule 9 (instr -> instr_assign ; .)
 
 
 state 28
 
-    (10) keyword -> keyword_print ; .
+    (10) instr -> instr_print ; .
 
-    {               reduce using rule 10 (keyword -> keyword_print ; .)
-    IF              reduce using rule 10 (keyword -> keyword_print ; .)
-    FOR             reduce using rule 10 (keyword -> keyword_print ; .)
-    WHILE           reduce using rule 10 (keyword -> keyword_print ; .)
-    RETURN          reduce using rule 10 (keyword -> keyword_print ; .)
-    PRINT           reduce using rule 10 (keyword -> keyword_print ; .)
-    BREAK           reduce using rule 10 (keyword -> keyword_print ; .)
-    CONTINUE        reduce using rule 10 (keyword -> keyword_print ; .)
-    ID              reduce using rule 10 (keyword -> keyword_print ; .)
-    $end            reduce using rule 10 (keyword -> keyword_print ; .)
-    }               reduce using rule 10 (keyword -> keyword_print ; .)
-    ELSE            reduce using rule 10 (keyword -> keyword_print ; .)
+    {               reduce using rule 10 (instr -> instr_print ; .)
+    IF              reduce using rule 10 (instr -> instr_print ; .)
+    FOR             reduce using rule 10 (instr -> instr_print ; .)
+    WHILE           reduce using rule 10 (instr -> instr_print ; .)
+    RETURN          reduce using rule 10 (instr -> instr_print ; .)
+    PRINT           reduce using rule 10 (instr -> instr_print ; .)
+    BREAK           reduce using rule 10 (instr -> instr_print ; .)
+    CONTINUE        reduce using rule 10 (instr -> instr_print ; .)
+    ID              reduce using rule 10 (instr -> instr_print ; .)
+    $end            reduce using rule 10 (instr -> instr_print ; .)
+    }               reduce using rule 10 (instr -> instr_print ; .)
+    ELSE            reduce using rule 10 (instr -> instr_print ; .)
 
 
 state 29
 
-    (11) keyword -> break ; .
+    (11) instr -> break ; .
 
-    {               reduce using rule 11 (keyword -> break ; .)
-    IF              reduce using rule 11 (keyword -> break ; .)
-    FOR             reduce using rule 11 (keyword -> break ; .)
-    WHILE           reduce using rule 11 (keyword -> break ; .)
-    RETURN          reduce using rule 11 (keyword -> break ; .)
-    PRINT           reduce using rule 11 (keyword -> break ; .)
-    BREAK           reduce using rule 11 (keyword -> break ; .)
-    CONTINUE        reduce using rule 11 (keyword -> break ; .)
-    ID              reduce using rule 11 (keyword -> break ; .)
-    $end            reduce using rule 11 (keyword -> break ; .)
-    }               reduce using rule 11 (keyword -> break ; .)
-    ELSE            reduce using rule 11 (keyword -> break ; .)
+    {               reduce using rule 11 (instr -> break ; .)
+    IF              reduce using rule 11 (instr -> break ; .)
+    FOR             reduce using rule 11 (instr -> break ; .)
+    WHILE           reduce using rule 11 (instr -> break ; .)
+    RETURN          reduce using rule 11 (instr -> break ; .)
+    PRINT           reduce using rule 11 (instr -> break ; .)
+    BREAK           reduce using rule 11 (instr -> break ; .)
+    CONTINUE        reduce using rule 11 (instr -> break ; .)
+    ID              reduce using rule 11 (instr -> break ; .)
+    $end            reduce using rule 11 (instr -> break ; .)
+    }               reduce using rule 11 (instr -> break ; .)
+    ELSE            reduce using rule 11 (instr -> break ; .)
 
 
 state 30
 
-    (12) keyword -> continue ; .
+    (12) instr -> continue ; .
 
-    {               reduce using rule 12 (keyword -> continue ; .)
-    IF              reduce using rule 12 (keyword -> continue ; .)
-    FOR             reduce using rule 12 (keyword -> continue ; .)
-    WHILE           reduce using rule 12 (keyword -> continue ; .)
-    RETURN          reduce using rule 12 (keyword -> continue ; .)
-    PRINT           reduce using rule 12 (keyword -> continue ; .)
-    BREAK           reduce using rule 12 (keyword -> continue ; .)
-    CONTINUE        reduce using rule 12 (keyword -> continue ; .)
-    ID              reduce using rule 12 (keyword -> continue ; .)
-    $end            reduce using rule 12 (keyword -> continue ; .)
-    }               reduce using rule 12 (keyword -> continue ; .)
-    ELSE            reduce using rule 12 (keyword -> continue ; .)
+    {               reduce using rule 12 (instr -> continue ; .)
+    IF              reduce using rule 12 (instr -> continue ; .)
+    FOR             reduce using rule 12 (instr -> continue ; .)
+    WHILE           reduce using rule 12 (instr -> continue ; .)
+    RETURN          reduce using rule 12 (instr -> continue ; .)
+    PRINT           reduce using rule 12 (instr -> continue ; .)
+    BREAK           reduce using rule 12 (instr -> continue ; .)
+    CONTINUE        reduce using rule 12 (instr -> continue ; .)
+    ID              reduce using rule 12 (instr -> continue ; .)
+    $end            reduce using rule 12 (instr -> continue ; .)
+    }               reduce using rule 12 (instr -> continue ; .)
+    ELSE            reduce using rule 12 (instr -> continue ; .)
 
 
 state 31
 
-    (13) keyword -> { keywords . }
-    (4) keywords -> keywords . keyword
-    (5) keyword -> . keyword_if
-    (6) keyword -> . keyword_for
-    (7) keyword -> . keyword_while
-    (8) keyword -> . keyword_return ;
-    (9) keyword -> . keyword_assign ;
-    (10) keyword -> . keyword_print ;
-    (11) keyword -> . break ;
-    (12) keyword -> . continue ;
-    (13) keyword -> . { keywords }
-    (14) keyword_if -> . IF ( expr ) keyword
-    (15) keyword_if -> . IF ( expr ) keyword ELSE keyword
-    (18) keyword_for -> . FOR id = expr : expr keyword
-    (19) keyword_while -> . WHILE ( expr ) keyword
-    (16) keyword_return -> . RETURN
-    (17) keyword_return -> . RETURN expr
-    (28) keyword_assign -> . assignable = expr
-    (29) keyword_assign -> . assignable ADDASSIGN expr
-    (30) keyword_assign -> . assignable SUBASSIGN expr
-    (31) keyword_assign -> . assignable MULASSIGN expr
-    (32) keyword_assign -> . assignable DIVASSIGN expr
-    (23) keyword_print -> . PRINT printables
+    (13) instr -> { instructions . }
+    (4) instructions -> instructions . instr
+    (5) instr -> . instr_if
+    (6) instr -> . instr_for
+    (7) instr -> . instr_while
+    (8) instr -> . instr_return ;
+    (9) instr -> . instr_assign ;
+    (10) instr -> . instr_print ;
+    (11) instr -> . break ;
+    (12) instr -> . continue ;
+    (13) instr -> . { instructions }
+    (14) instr_if -> . IF ( expr ) instr
+    (15) instr_if -> . IF ( expr ) instr ELSE instr
+    (18) instr_for -> . FOR id = expr : expr instr
+    (19) instr_while -> . WHILE ( expr ) instr
+    (16) instr_return -> . RETURN
+    (17) instr_return -> . RETURN expr
+    (28) instr_assign -> . assignable = expr
+    (29) instr_assign -> . assignable ADDASSIGN expr
+    (30) instr_assign -> . assignable SUBASSIGN expr
+    (31) instr_assign -> . assignable MULASSIGN expr
+    (32) instr_assign -> . assignable DIVASSIGN expr
+    (23) instr_print -> . PRINT printables
     (20) break -> . BREAK
     (21) continue -> . CONTINUE
     (34) assignable -> . id
@@ -937,13 +937,13 @@ state 31
     CONTINUE        shift and go to state 21
     ID              shift and go to state 24
 
-    keyword                        shift and go to state 25
-    keyword_if                     shift and go to state 4
-    keyword_for                    shift and go to state 5
-    keyword_while                  shift and go to state 6
-    keyword_return                 shift and go to state 7
-    keyword_assign                 shift and go to state 8
-    keyword_print                  shift and go to state 9
+    instr                          shift and go to state 25
+    instr_if                       shift and go to state 4
+    instr_for                      shift and go to state 5
+    instr_while                    shift and go to state 6
+    instr_return                   shift and go to state 7
+    instr_assign                   shift and go to state 8
+    instr_print                    shift and go to state 9
     break                          shift and go to state 10
     continue                       shift and go to state 11
     id                             shift and go to state 15
@@ -953,8 +953,8 @@ state 31
 
 state 32
 
-    (14) keyword_if -> IF ( . expr ) keyword
-    (15) keyword_if -> IF ( . expr ) keyword ELSE keyword
+    (14) instr_if -> IF ( . expr ) instr
+    (15) instr_if -> IF ( . expr ) instr ELSE instr
     (37) expr -> . expr '
     (38) expr -> . ( expr )
     (39) expr -> . matrix_create ( expr )
@@ -1008,7 +1008,7 @@ state 32
 
 state 33
 
-    (18) keyword_for -> FOR id . = expr : expr keyword
+    (18) instr_for -> FOR id . = expr : expr instr
 
     =               shift and go to state 60
 
@@ -1023,7 +1023,7 @@ state 34
 
 state 35
 
-    (19) keyword_while -> WHILE ( . expr ) keyword
+    (19) instr_while -> WHILE ( . expr ) instr
     (37) expr -> . expr '
     (38) expr -> . ( expr )
     (39) expr -> . matrix_create ( expr )
@@ -1077,7 +1077,7 @@ state 35
 
 state 36
 
-    (17) keyword_return -> RETURN expr .
+    (17) instr_return -> RETURN expr .
     (37) expr -> expr . '
     (45) expr -> expr . + expr
     (46) expr -> expr . - expr
@@ -1094,7 +1094,7 @@ state 36
     (57) expr -> expr . LEQ expr
     (58) expr -> expr . GEQ expr
 
-    ;               reduce using rule 17 (keyword_return -> RETURN expr .)
+    ;               reduce using rule 17 (instr_return -> RETURN expr .)
     '               shift and go to state 63
     +               shift and go to state 64
     -               shift and go to state 65
@@ -1398,7 +1398,7 @@ state 47
 
 state 48
 
-    (28) keyword_assign -> assignable = . expr
+    (28) instr_assign -> assignable = . expr
     (37) expr -> . expr '
     (38) expr -> . ( expr )
     (39) expr -> . matrix_create ( expr )
@@ -1452,7 +1452,7 @@ state 48
 
 state 49
 
-    (29) keyword_assign -> assignable ADDASSIGN . expr
+    (29) instr_assign -> assignable ADDASSIGN . expr
     (37) expr -> . expr '
     (38) expr -> . ( expr )
     (39) expr -> . matrix_create ( expr )
@@ -1506,7 +1506,7 @@ state 49
 
 state 50
 
-    (30) keyword_assign -> assignable SUBASSIGN . expr
+    (30) instr_assign -> assignable SUBASSIGN . expr
     (37) expr -> . expr '
     (38) expr -> . ( expr )
     (39) expr -> . matrix_create ( expr )
@@ -1560,7 +1560,7 @@ state 50
 
 state 51
 
-    (31) keyword_assign -> assignable MULASSIGN . expr
+    (31) instr_assign -> assignable MULASSIGN . expr
     (37) expr -> . expr '
     (38) expr -> . ( expr )
     (39) expr -> . matrix_create ( expr )
@@ -1614,7 +1614,7 @@ state 51
 
 state 52
 
-    (32) keyword_assign -> assignable DIVASSIGN . expr
+    (32) instr_assign -> assignable DIVASSIGN . expr
     (37) expr -> . expr '
     (38) expr -> . ( expr )
     (39) expr -> . matrix_create ( expr )
@@ -1668,10 +1668,10 @@ state 52
 
 state 53
 
-    (23) keyword_print -> PRINT printables .
+    (23) instr_print -> PRINT printables .
     (25) printables -> printables . , printable
 
-    ;               reduce using rule 23 (keyword_print -> PRINT printables .)
+    ;               reduce using rule 23 (instr_print -> PRINT printables .)
     ,               shift and go to state 89
 
 
@@ -1739,26 +1739,26 @@ state 57
 
 state 58
 
-    (13) keyword -> { keywords } .
+    (13) instr -> { instructions } .
 
-    {               reduce using rule 13 (keyword -> { keywords } .)
-    IF              reduce using rule 13 (keyword -> { keywords } .)
-    FOR             reduce using rule 13 (keyword -> { keywords } .)
-    WHILE           reduce using rule 13 (keyword -> { keywords } .)
-    RETURN          reduce using rule 13 (keyword -> { keywords } .)
-    PRINT           reduce using rule 13 (keyword -> { keywords } .)
-    BREAK           reduce using rule 13 (keyword -> { keywords } .)
-    CONTINUE        reduce using rule 13 (keyword -> { keywords } .)
-    ID              reduce using rule 13 (keyword -> { keywords } .)
-    $end            reduce using rule 13 (keyword -> { keywords } .)
-    }               reduce using rule 13 (keyword -> { keywords } .)
-    ELSE            reduce using rule 13 (keyword -> { keywords } .)
+    {               reduce using rule 13 (instr -> { instructions } .)
+    IF              reduce using rule 13 (instr -> { instructions } .)
+    FOR             reduce using rule 13 (instr -> { instructions } .)
+    WHILE           reduce using rule 13 (instr -> { instructions } .)
+    RETURN          reduce using rule 13 (instr -> { instructions } .)
+    PRINT           reduce using rule 13 (instr -> { instructions } .)
+    BREAK           reduce using rule 13 (instr -> { instructions } .)
+    CONTINUE        reduce using rule 13 (instr -> { instructions } .)
+    ID              reduce using rule 13 (instr -> { instructions } .)
+    $end            reduce using rule 13 (instr -> { instructions } .)
+    }               reduce using rule 13 (instr -> { instructions } .)
+    ELSE            reduce using rule 13 (instr -> { instructions } .)
 
 
 state 59
 
-    (14) keyword_if -> IF ( expr . ) keyword
-    (15) keyword_if -> IF ( expr . ) keyword ELSE keyword
+    (14) instr_if -> IF ( expr . ) instr
+    (15) instr_if -> IF ( expr . ) instr ELSE instr
     (37) expr -> expr . '
     (45) expr -> expr . + expr
     (46) expr -> expr . - expr
@@ -1795,7 +1795,7 @@ state 59
 
 state 60
 
-    (18) keyword_for -> FOR id = . expr : expr keyword
+    (18) instr_for -> FOR id = . expr : expr instr
     (37) expr -> . expr '
     (38) expr -> . ( expr )
     (39) expr -> . matrix_create ( expr )
@@ -1858,7 +1858,7 @@ state 61
 
 state 62
 
-    (19) keyword_while -> WHILE ( expr . ) keyword
+    (19) instr_while -> WHILE ( expr . ) instr
     (37) expr -> expr . '
     (45) expr -> expr . + expr
     (46) expr -> expr . - expr
@@ -2884,7 +2884,7 @@ state 83
 
 state 84
 
-    (28) keyword_assign -> assignable = expr .
+    (28) instr_assign -> assignable = expr .
     (37) expr -> expr . '
     (45) expr -> expr . + expr
     (46) expr -> expr . - expr
@@ -2901,7 +2901,7 @@ state 84
     (57) expr -> expr . LEQ expr
     (58) expr -> expr . GEQ expr
 
-    ;               reduce using rule 28 (keyword_assign -> assignable = expr .)
+    ;               reduce using rule 28 (instr_assign -> assignable = expr .)
     '               shift and go to state 63
     +               shift and go to state 64
     -               shift and go to state 65
@@ -2921,7 +2921,7 @@ state 84
 
 state 85
 
-    (29) keyword_assign -> assignable ADDASSIGN expr .
+    (29) instr_assign -> assignable ADDASSIGN expr .
     (37) expr -> expr . '
     (45) expr -> expr . + expr
     (46) expr -> expr . - expr
@@ -2938,7 +2938,7 @@ state 85
     (57) expr -> expr . LEQ expr
     (58) expr -> expr . GEQ expr
 
-    ;               reduce using rule 29 (keyword_assign -> assignable ADDASSIGN expr .)
+    ;               reduce using rule 29 (instr_assign -> assignable ADDASSIGN expr .)
     '               shift and go to state 63
     +               shift and go to state 64
     -               shift and go to state 65
@@ -2958,7 +2958,7 @@ state 85
 
 state 86
 
-    (30) keyword_assign -> assignable SUBASSIGN expr .
+    (30) instr_assign -> assignable SUBASSIGN expr .
     (37) expr -> expr . '
     (45) expr -> expr . + expr
     (46) expr -> expr . - expr
@@ -2975,7 +2975,7 @@ state 86
     (57) expr -> expr . LEQ expr
     (58) expr -> expr . GEQ expr
 
-    ;               reduce using rule 30 (keyword_assign -> assignable SUBASSIGN expr .)
+    ;               reduce using rule 30 (instr_assign -> assignable SUBASSIGN expr .)
     '               shift and go to state 63
     +               shift and go to state 64
     -               shift and go to state 65
@@ -2995,7 +2995,7 @@ state 86
 
 state 87
 
-    (31) keyword_assign -> assignable MULASSIGN expr .
+    (31) instr_assign -> assignable MULASSIGN expr .
     (37) expr -> expr . '
     (45) expr -> expr . + expr
     (46) expr -> expr . - expr
@@ -3012,7 +3012,7 @@ state 87
     (57) expr -> expr . LEQ expr
     (58) expr -> expr . GEQ expr
 
-    ;               reduce using rule 31 (keyword_assign -> assignable MULASSIGN expr .)
+    ;               reduce using rule 31 (instr_assign -> assignable MULASSIGN expr .)
     '               shift and go to state 63
     +               shift and go to state 64
     -               shift and go to state 65
@@ -3032,7 +3032,7 @@ state 87
 
 state 88
 
-    (32) keyword_assign -> assignable DIVASSIGN expr .
+    (32) instr_assign -> assignable DIVASSIGN expr .
     (37) expr -> expr . '
     (45) expr -> expr . + expr
     (46) expr -> expr . - expr
@@ -3049,7 +3049,7 @@ state 88
     (57) expr -> expr . LEQ expr
     (58) expr -> expr . GEQ expr
 
-    ;               reduce using rule 32 (keyword_assign -> assignable DIVASSIGN expr .)
+    ;               reduce using rule 32 (instr_assign -> assignable DIVASSIGN expr .)
     '               shift and go to state 63
     +               shift and go to state 64
     -               shift and go to state 65
@@ -3129,29 +3129,29 @@ state 89
 
 state 90
 
-    (14) keyword_if -> IF ( expr ) . keyword
-    (15) keyword_if -> IF ( expr ) . keyword ELSE keyword
-    (5) keyword -> . keyword_if
-    (6) keyword -> . keyword_for
-    (7) keyword -> . keyword_while
-    (8) keyword -> . keyword_return ;
-    (9) keyword -> . keyword_assign ;
-    (10) keyword -> . keyword_print ;
-    (11) keyword -> . break ;
-    (12) keyword -> . continue ;
-    (13) keyword -> . { keywords }
-    (14) keyword_if -> . IF ( expr ) keyword
-    (15) keyword_if -> . IF ( expr ) keyword ELSE keyword
-    (18) keyword_for -> . FOR id = expr : expr keyword
-    (19) keyword_while -> . WHILE ( expr ) keyword
-    (16) keyword_return -> . RETURN
-    (17) keyword_return -> . RETURN expr
-    (28) keyword_assign -> . assignable = expr
-    (29) keyword_assign -> . assignable ADDASSIGN expr
-    (30) keyword_assign -> . assignable SUBASSIGN expr
-    (31) keyword_assign -> . assignable MULASSIGN expr
-    (32) keyword_assign -> . assignable DIVASSIGN expr
-    (23) keyword_print -> . PRINT printables
+    (14) instr_if -> IF ( expr ) . instr
+    (15) instr_if -> IF ( expr ) . instr ELSE instr
+    (5) instr -> . instr_if
+    (6) instr -> . instr_for
+    (7) instr -> . instr_while
+    (8) instr -> . instr_return ;
+    (9) instr -> . instr_assign ;
+    (10) instr -> . instr_print ;
+    (11) instr -> . break ;
+    (12) instr -> . continue ;
+    (13) instr -> . { instructions }
+    (14) instr_if -> . IF ( expr ) instr
+    (15) instr_if -> . IF ( expr ) instr ELSE instr
+    (18) instr_for -> . FOR id = expr : expr instr
+    (19) instr_while -> . WHILE ( expr ) instr
+    (16) instr_return -> . RETURN
+    (17) instr_return -> . RETURN expr
+    (28) instr_assign -> . assignable = expr
+    (29) instr_assign -> . assignable ADDASSIGN expr
+    (30) instr_assign -> . assignable SUBASSIGN expr
+    (31) instr_assign -> . assignable MULASSIGN expr
+    (32) instr_assign -> . assignable DIVASSIGN expr
+    (23) instr_print -> . PRINT printables
     (20) break -> . BREAK
     (21) continue -> . CONTINUE
     (34) assignable -> . id
@@ -3171,13 +3171,13 @@ state 90
     CONTINUE        shift and go to state 21
     ID              shift and go to state 24
 
-    keyword                        shift and go to state 119
-    keyword_if                     shift and go to state 4
-    keyword_for                    shift and go to state 5
-    keyword_while                  shift and go to state 6
-    keyword_return                 shift and go to state 7
-    keyword_assign                 shift and go to state 8
-    keyword_print                  shift and go to state 9
+    instr                          shift and go to state 119
+    instr_if                       shift and go to state 4
+    instr_for                      shift and go to state 5
+    instr_while                    shift and go to state 6
+    instr_return                   shift and go to state 7
+    instr_assign                   shift and go to state 8
+    instr_print                    shift and go to state 9
     break                          shift and go to state 10
     continue                       shift and go to state 11
     id                             shift and go to state 15
@@ -3187,7 +3187,7 @@ state 90
 
 state 91
 
-    (18) keyword_for -> FOR id = expr . : expr keyword
+    (18) instr_for -> FOR id = expr . : expr instr
     (37) expr -> expr . '
     (45) expr -> expr . + expr
     (46) expr -> expr . - expr
@@ -3271,28 +3271,28 @@ state 93
 
 state 94
 
-    (19) keyword_while -> WHILE ( expr ) . keyword
-    (5) keyword -> . keyword_if
-    (6) keyword -> . keyword_for
-    (7) keyword -> . keyword_while
-    (8) keyword -> . keyword_return ;
-    (9) keyword -> . keyword_assign ;
-    (10) keyword -> . keyword_print ;
-    (11) keyword -> . break ;
-    (12) keyword -> . continue ;
-    (13) keyword -> . { keywords }
-    (14) keyword_if -> . IF ( expr ) keyword
-    (15) keyword_if -> . IF ( expr ) keyword ELSE keyword
-    (18) keyword_for -> . FOR id = expr : expr keyword
-    (19) keyword_while -> . WHILE ( expr ) keyword
-    (16) keyword_return -> . RETURN
-    (17) keyword_return -> . RETURN expr
-    (28) keyword_assign -> . assignable = expr
-    (29) keyword_assign -> . assignable ADDASSIGN expr
-    (30) keyword_assign -> . assignable SUBASSIGN expr
-    (31) keyword_assign -> . assignable MULASSIGN expr
-    (32) keyword_assign -> . assignable DIVASSIGN expr
-    (23) keyword_print -> . PRINT printables
+    (19) instr_while -> WHILE ( expr ) . instr
+    (5) instr -> . instr_if
+    (6) instr -> . instr_for
+    (7) instr -> . instr_while
+    (8) instr -> . instr_return ;
+    (9) instr -> . instr_assign ;
+    (10) instr -> . instr_print ;
+    (11) instr -> . break ;
+    (12) instr -> . continue ;
+    (13) instr -> . { instructions }
+    (14) instr_if -> . IF ( expr ) instr
+    (15) instr_if -> . IF ( expr ) instr ELSE instr
+    (18) instr_for -> . FOR id = expr : expr instr
+    (19) instr_while -> . WHILE ( expr ) instr
+    (16) instr_return -> . RETURN
+    (17) instr_return -> . RETURN expr
+    (28) instr_assign -> . assignable = expr
+    (29) instr_assign -> . assignable ADDASSIGN expr
+    (30) instr_assign -> . assignable SUBASSIGN expr
+    (31) instr_assign -> . assignable MULASSIGN expr
+    (32) instr_assign -> . assignable DIVASSIGN expr
+    (23) instr_print -> . PRINT printables
     (20) break -> . BREAK
     (21) continue -> . CONTINUE
     (34) assignable -> . id
@@ -3312,13 +3312,13 @@ state 94
     CONTINUE        shift and go to state 21
     ID              shift and go to state 24
 
-    keyword                        shift and go to state 122
-    keyword_if                     shift and go to state 4
-    keyword_for                    shift and go to state 5
-    keyword_while                  shift and go to state 6
-    keyword_return                 shift and go to state 7
-    keyword_assign                 shift and go to state 8
-    keyword_print                  shift and go to state 9
+    instr                          shift and go to state 122
+    instr_if                       shift and go to state 4
+    instr_for                      shift and go to state 5
+    instr_while                    shift and go to state 6
+    instr_return                   shift and go to state 7
+    instr_assign                   shift and go to state 8
+    instr_print                    shift and go to state 9
     break                          shift and go to state 10
     continue                       shift and go to state 11
     id                             shift and go to state 15
@@ -4401,28 +4401,28 @@ state 118
 
 state 119
 
-    (14) keyword_if -> IF ( expr ) keyword .
-    (15) keyword_if -> IF ( expr ) keyword . ELSE keyword
+    (14) instr_if -> IF ( expr ) instr .
+    (15) instr_if -> IF ( expr ) instr . ELSE instr
 
-    {               reduce using rule 14 (keyword_if -> IF ( expr ) keyword .)
-    IF              reduce using rule 14 (keyword_if -> IF ( expr ) keyword .)
-    FOR             reduce using rule 14 (keyword_if -> IF ( expr ) keyword .)
-    WHILE           reduce using rule 14 (keyword_if -> IF ( expr ) keyword .)
-    RETURN          reduce using rule 14 (keyword_if -> IF ( expr ) keyword .)
-    PRINT           reduce using rule 14 (keyword_if -> IF ( expr ) keyword .)
-    BREAK           reduce using rule 14 (keyword_if -> IF ( expr ) keyword .)
-    CONTINUE        reduce using rule 14 (keyword_if -> IF ( expr ) keyword .)
-    ID              reduce using rule 14 (keyword_if -> IF ( expr ) keyword .)
-    $end            reduce using rule 14 (keyword_if -> IF ( expr ) keyword .)
-    }               reduce using rule 14 (keyword_if -> IF ( expr ) keyword .)
+    {               reduce using rule 14 (instr_if -> IF ( expr ) instr .)
+    IF              reduce using rule 14 (instr_if -> IF ( expr ) instr .)
+    FOR             reduce using rule 14 (instr_if -> IF ( expr ) instr .)
+    WHILE           reduce using rule 14 (instr_if -> IF ( expr ) instr .)
+    RETURN          reduce using rule 14 (instr_if -> IF ( expr ) instr .)
+    PRINT           reduce using rule 14 (instr_if -> IF ( expr ) instr .)
+    BREAK           reduce using rule 14 (instr_if -> IF ( expr ) instr .)
+    CONTINUE        reduce using rule 14 (instr_if -> IF ( expr ) instr .)
+    ID              reduce using rule 14 (instr_if -> IF ( expr ) instr .)
+    $end            reduce using rule 14 (instr_if -> IF ( expr ) instr .)
+    }               reduce using rule 14 (instr_if -> IF ( expr ) instr .)
     ELSE            shift and go to state 127
 
-  ! ELSE            [ reduce using rule 14 (keyword_if -> IF ( expr ) keyword .) ]
+  ! ELSE            [ reduce using rule 14 (instr_if -> IF ( expr ) instr .) ]
 
 
 state 120
 
-    (18) keyword_for -> FOR id = expr : . expr keyword
+    (18) instr_for -> FOR id = expr : . expr instr
     (37) expr -> . expr '
     (38) expr -> . ( expr )
     (39) expr -> . matrix_create ( expr )
@@ -4483,20 +4483,20 @@ state 121
 
 state 122
 
-    (19) keyword_while -> WHILE ( expr ) keyword .
+    (19) instr_while -> WHILE ( expr ) instr .
 
-    {               reduce using rule 19 (keyword_while -> WHILE ( expr ) keyword .)
-    IF              reduce using rule 19 (keyword_while -> WHILE ( expr ) keyword .)
-    FOR             reduce using rule 19 (keyword_while -> WHILE ( expr ) keyword .)
-    WHILE           reduce using rule 19 (keyword_while -> WHILE ( expr ) keyword .)
-    RETURN          reduce using rule 19 (keyword_while -> WHILE ( expr ) keyword .)
-    PRINT           reduce using rule 19 (keyword_while -> WHILE ( expr ) keyword .)
-    BREAK           reduce using rule 19 (keyword_while -> WHILE ( expr ) keyword .)
-    CONTINUE        reduce using rule 19 (keyword_while -> WHILE ( expr ) keyword .)
-    ID              reduce using rule 19 (keyword_while -> WHILE ( expr ) keyword .)
-    $end            reduce using rule 19 (keyword_while -> WHILE ( expr ) keyword .)
-    }               reduce using rule 19 (keyword_while -> WHILE ( expr ) keyword .)
-    ELSE            reduce using rule 19 (keyword_while -> WHILE ( expr ) keyword .)
+    {               reduce using rule 19 (instr_while -> WHILE ( expr ) instr .)
+    IF              reduce using rule 19 (instr_while -> WHILE ( expr ) instr .)
+    FOR             reduce using rule 19 (instr_while -> WHILE ( expr ) instr .)
+    WHILE           reduce using rule 19 (instr_while -> WHILE ( expr ) instr .)
+    RETURN          reduce using rule 19 (instr_while -> WHILE ( expr ) instr .)
+    PRINT           reduce using rule 19 (instr_while -> WHILE ( expr ) instr .)
+    BREAK           reduce using rule 19 (instr_while -> WHILE ( expr ) instr .)
+    CONTINUE        reduce using rule 19 (instr_while -> WHILE ( expr ) instr .)
+    ID              reduce using rule 19 (instr_while -> WHILE ( expr ) instr .)
+    $end            reduce using rule 19 (instr_while -> WHILE ( expr ) instr .)
+    }               reduce using rule 19 (instr_while -> WHILE ( expr ) instr .)
+    ELSE            reduce using rule 19 (instr_while -> WHILE ( expr ) instr .)
 
 
 state 123
@@ -4574,28 +4574,28 @@ state 126
 
 state 127
 
-    (15) keyword_if -> IF ( expr ) keyword ELSE . keyword
-    (5) keyword -> . keyword_if
-    (6) keyword -> . keyword_for
-    (7) keyword -> . keyword_while
-    (8) keyword -> . keyword_return ;
-    (9) keyword -> . keyword_assign ;
-    (10) keyword -> . keyword_print ;
-    (11) keyword -> . break ;
-    (12) keyword -> . continue ;
-    (13) keyword -> . { keywords }
-    (14) keyword_if -> . IF ( expr ) keyword
-    (15) keyword_if -> . IF ( expr ) keyword ELSE keyword
-    (18) keyword_for -> . FOR id = expr : expr keyword
-    (19) keyword_while -> . WHILE ( expr ) keyword
-    (16) keyword_return -> . RETURN
-    (17) keyword_return -> . RETURN expr
-    (28) keyword_assign -> . assignable = expr
-    (29) keyword_assign -> . assignable ADDASSIGN expr
-    (30) keyword_assign -> . assignable SUBASSIGN expr
-    (31) keyword_assign -> . assignable MULASSIGN expr
-    (32) keyword_assign -> . assignable DIVASSIGN expr
-    (23) keyword_print -> . PRINT printables
+    (15) instr_if -> IF ( expr ) instr ELSE . instr
+    (5) instr -> . instr_if
+    (6) instr -> . instr_for
+    (7) instr -> . instr_while
+    (8) instr -> . instr_return ;
+    (9) instr -> . instr_assign ;
+    (10) instr -> . instr_print ;
+    (11) instr -> . break ;
+    (12) instr -> . continue ;
+    (13) instr -> . { instructions }
+    (14) instr_if -> . IF ( expr ) instr
+    (15) instr_if -> . IF ( expr ) instr ELSE instr
+    (18) instr_for -> . FOR id = expr : expr instr
+    (19) instr_while -> . WHILE ( expr ) instr
+    (16) instr_return -> . RETURN
+    (17) instr_return -> . RETURN expr
+    (28) instr_assign -> . assignable = expr
+    (29) instr_assign -> . assignable ADDASSIGN expr
+    (30) instr_assign -> . assignable SUBASSIGN expr
+    (31) instr_assign -> . assignable MULASSIGN expr
+    (32) instr_assign -> . assignable DIVASSIGN expr
+    (23) instr_print -> . PRINT printables
     (20) break -> . BREAK
     (21) continue -> . CONTINUE
     (34) assignable -> . id
@@ -4615,13 +4615,13 @@ state 127
     CONTINUE        shift and go to state 21
     ID              shift and go to state 24
 
-    keyword                        shift and go to state 131
-    keyword_if                     shift and go to state 4
-    keyword_for                    shift and go to state 5
-    keyword_while                  shift and go to state 6
-    keyword_return                 shift and go to state 7
-    keyword_assign                 shift and go to state 8
-    keyword_print                  shift and go to state 9
+    instr                          shift and go to state 131
+    instr_if                       shift and go to state 4
+    instr_for                      shift and go to state 5
+    instr_while                    shift and go to state 6
+    instr_return                   shift and go to state 7
+    instr_assign                   shift and go to state 8
+    instr_print                    shift and go to state 9
     break                          shift and go to state 10
     continue                       shift and go to state 11
     id                             shift and go to state 15
@@ -4631,7 +4631,7 @@ state 127
 
 state 128
 
-    (18) keyword_for -> FOR id = expr : expr . keyword
+    (18) instr_for -> FOR id = expr : expr . instr
     (37) expr -> expr . '
     (45) expr -> expr . + expr
     (46) expr -> expr . - expr
@@ -4647,27 +4647,27 @@ state 128
     (56) expr -> expr . NEQ expr
     (57) expr -> expr . LEQ expr
     (58) expr -> expr . GEQ expr
-    (5) keyword -> . keyword_if
-    (6) keyword -> . keyword_for
-    (7) keyword -> . keyword_while
-    (8) keyword -> . keyword_return ;
-    (9) keyword -> . keyword_assign ;
-    (10) keyword -> . keyword_print ;
-    (11) keyword -> . break ;
-    (12) keyword -> . continue ;
-    (13) keyword -> . { keywords }
-    (14) keyword_if -> . IF ( expr ) keyword
-    (15) keyword_if -> . IF ( expr ) keyword ELSE keyword
-    (18) keyword_for -> . FOR id = expr : expr keyword
-    (19) keyword_while -> . WHILE ( expr ) keyword
-    (16) keyword_return -> . RETURN
-    (17) keyword_return -> . RETURN expr
-    (28) keyword_assign -> . assignable = expr
-    (29) keyword_assign -> . assignable ADDASSIGN expr
-    (30) keyword_assign -> . assignable SUBASSIGN expr
-    (31) keyword_assign -> . assignable MULASSIGN expr
-    (32) keyword_assign -> . assignable DIVASSIGN expr
-    (23) keyword_print -> . PRINT printables
+    (5) instr -> . instr_if
+    (6) instr -> . instr_for
+    (7) instr -> . instr_while
+    (8) instr -> . instr_return ;
+    (9) instr -> . instr_assign ;
+    (10) instr -> . instr_print ;
+    (11) instr -> . break ;
+    (12) instr -> . continue ;
+    (13) instr -> . { instructions }
+    (14) instr_if -> . IF ( expr ) instr
+    (15) instr_if -> . IF ( expr ) instr ELSE instr
+    (18) instr_for -> . FOR id = expr : expr instr
+    (19) instr_while -> . WHILE ( expr ) instr
+    (16) instr_return -> . RETURN
+    (17) instr_return -> . RETURN expr
+    (28) instr_assign -> . assignable = expr
+    (29) instr_assign -> . assignable ADDASSIGN expr
+    (30) instr_assign -> . assignable SUBASSIGN expr
+    (31) instr_assign -> . assignable MULASSIGN expr
+    (32) instr_assign -> . assignable DIVASSIGN expr
+    (23) instr_print -> . PRINT printables
     (20) break -> . BREAK
     (21) continue -> . CONTINUE
     (34) assignable -> . id
@@ -4703,13 +4703,13 @@ state 128
     ID              shift and go to state 24
 
     id                             shift and go to state 15
-    keyword                        shift and go to state 132
-    keyword_if                     shift and go to state 4
-    keyword_for                    shift and go to state 5
-    keyword_while                  shift and go to state 6
-    keyword_return                 shift and go to state 7
-    keyword_assign                 shift and go to state 8
-    keyword_print                  shift and go to state 9
+    instr                          shift and go to state 132
+    instr_if                       shift and go to state 4
+    instr_for                      shift and go to state 5
+    instr_while                    shift and go to state 6
+    instr_return                   shift and go to state 7
+    instr_assign                   shift and go to state 8
+    instr_print                    shift and go to state 9
     break                          shift and go to state 10
     continue                       shift and go to state 11
     assignable                     shift and go to state 18
@@ -4766,36 +4766,36 @@ state 130
 
 state 131
 
-    (15) keyword_if -> IF ( expr ) keyword ELSE keyword .
+    (15) instr_if -> IF ( expr ) instr ELSE instr .
 
-    {               reduce using rule 15 (keyword_if -> IF ( expr ) keyword ELSE keyword .)
-    IF              reduce using rule 15 (keyword_if -> IF ( expr ) keyword ELSE keyword .)
-    FOR             reduce using rule 15 (keyword_if -> IF ( expr ) keyword ELSE keyword .)
-    WHILE           reduce using rule 15 (keyword_if -> IF ( expr ) keyword ELSE keyword .)
-    RETURN          reduce using rule 15 (keyword_if -> IF ( expr ) keyword ELSE keyword .)
-    PRINT           reduce using rule 15 (keyword_if -> IF ( expr ) keyword ELSE keyword .)
-    BREAK           reduce using rule 15 (keyword_if -> IF ( expr ) keyword ELSE keyword .)
-    CONTINUE        reduce using rule 15 (keyword_if -> IF ( expr ) keyword ELSE keyword .)
-    ID              reduce using rule 15 (keyword_if -> IF ( expr ) keyword ELSE keyword .)
-    $end            reduce using rule 15 (keyword_if -> IF ( expr ) keyword ELSE keyword .)
-    }               reduce using rule 15 (keyword_if -> IF ( expr ) keyword ELSE keyword .)
-    ELSE            reduce using rule 15 (keyword_if -> IF ( expr ) keyword ELSE keyword .)
+    {               reduce using rule 15 (instr_if -> IF ( expr ) instr ELSE instr .)
+    IF              reduce using rule 15 (instr_if -> IF ( expr ) instr ELSE instr .)
+    FOR             reduce using rule 15 (instr_if -> IF ( expr ) instr ELSE instr .)
+    WHILE           reduce using rule 15 (instr_if -> IF ( expr ) instr ELSE instr .)
+    RETURN          reduce using rule 15 (instr_if -> IF ( expr ) instr ELSE instr .)
+    PRINT           reduce using rule 15 (instr_if -> IF ( expr ) instr ELSE instr .)
+    BREAK           reduce using rule 15 (instr_if -> IF ( expr ) instr ELSE instr .)
+    CONTINUE        reduce using rule 15 (instr_if -> IF ( expr ) instr ELSE instr .)
+    ID              reduce using rule 15 (instr_if -> IF ( expr ) instr ELSE instr .)
+    $end            reduce using rule 15 (instr_if -> IF ( expr ) instr ELSE instr .)
+    }               reduce using rule 15 (instr_if -> IF ( expr ) instr ELSE instr .)
+    ELSE            reduce using rule 15 (instr_if -> IF ( expr ) instr ELSE instr .)
 
 
 state 132
 
-    (18) keyword_for -> FOR id = expr : expr keyword .
+    (18) instr_for -> FOR id = expr : expr instr .
 
-    {               reduce using rule 18 (keyword_for -> FOR id = expr : expr keyword .)
-    IF              reduce using rule 18 (keyword_for -> FOR id = expr : expr keyword .)
-    FOR             reduce using rule 18 (keyword_for -> FOR id = expr : expr keyword .)
-    WHILE           reduce using rule 18 (keyword_for -> FOR id = expr : expr keyword .)
-    RETURN          reduce using rule 18 (keyword_for -> FOR id = expr : expr keyword .)
-    PRINT           reduce using rule 18 (keyword_for -> FOR id = expr : expr keyword .)
-    BREAK           reduce using rule 18 (keyword_for -> FOR id = expr : expr keyword .)
-    CONTINUE        reduce using rule 18 (keyword_for -> FOR id = expr : expr keyword .)
-    ID              reduce using rule 18 (keyword_for -> FOR id = expr : expr keyword .)
-    $end            reduce using rule 18 (keyword_for -> FOR id = expr : expr keyword .)
-    }               reduce using rule 18 (keyword_for -> FOR id = expr : expr keyword .)
-    ELSE            reduce using rule 18 (keyword_for -> FOR id = expr : expr keyword .)
+    {               reduce using rule 18 (instr_for -> FOR id = expr : expr instr .)
+    IF              reduce using rule 18 (instr_for -> FOR id = expr : expr instr .)
+    FOR             reduce using rule 18 (instr_for -> FOR id = expr : expr instr .)
+    WHILE           reduce using rule 18 (instr_for -> FOR id = expr : expr instr .)
+    RETURN          reduce using rule 18 (instr_for -> FOR id = expr : expr instr .)
+    PRINT           reduce using rule 18 (instr_for -> FOR id = expr : expr instr .)
+    BREAK           reduce using rule 18 (instr_for -> FOR id = expr : expr instr .)
+    CONTINUE        reduce using rule 18 (instr_for -> FOR id = expr : expr instr .)
+    ID              reduce using rule 18 (instr_for -> FOR id = expr : expr instr .)
+    $end            reduce using rule 18 (instr_for -> FOR id = expr : expr instr .)
+    }               reduce using rule 18 (instr_for -> FOR id = expr : expr instr .)
+    ELSE            reduce using rule 18 (instr_for -> FOR id = expr : expr instr .)
 
